@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSenseAI — Your AI Personal Shopper</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+        .header{background:linear-gradient(135deg,#1f0a0a,#0f0a1a);border-bottom:1px solid #2e1a1a;padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:24px;font-weight:700;color:#fb923c}.logo span{color:#f97316}
+        nav a{color:#9ca3af;text-decoration:none;margin-left:24px;font-size:14px;transition:color .2s}nav a:hover{color:#fb923c}
+        .container{max-width:900px;margin:40px auto;padding:0 20px}
+        h1{font-size:32px;text-align:center;margin-bottom:8px;background:linear-gradient(to right,#fb923c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{text-align:center;color:#9ca3af;margin-bottom:32px;font-size:15px}
+        .form-card{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px}
+        .form-group{margin-bottom:16px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        label{display:block;font-size:13px;color:#9ca3af;margin-bottom:6px;font-weight:500}
+        input,select,textarea{width:100%;padding:12px 16px;background:#0a0a14;border:1px solid #2a2a3e;border-radius:10px;color:#e0e0e0;font-size:14px;outline:none;transition:border-color .2s}
+        input:focus,select:focus,textarea:focus{border-color:#f97316}
+        textarea{resize:vertical;min-height:80px}
+        .examples{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+        .examples button{background:#1e1e2e;border:1px solid #2a2a3e;color:#9ca3af;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;transition:all .2s}
+        .examples button:hover{border-color:#f97316;color:#fb923c}
+        .btn{width:100%;padding:14px;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .2s;margin-top:8px}
+        .btn:hover{opacity:.9}.btn:disabled{opacity:.5;cursor:not-allowed}
+        .output{margin-top:24px;background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;display:none}
+        .output h2{font-size:20px;color:#fb923c;margin-bottom:16px}
+        .output pre{white-space:pre-wrap;font-family:'Cascadia Code','Fira Code',monospace;line-height:1.7;font-size:14px;color:#d0d0d0}
+        .copy-btn{background:#1e1e2e;color:#fb923c;border:1px solid #2a2a3e;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;margin-top:12px}.copy-btn:hover{background:#2a2a3e}
+        .spinner{display:inline-block;width:18px;height:18px;border:2px solid #fff3;border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .error{color:#f87171;margin-top:12px;font-size:14px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ShopSense<span>AI</span></div>
+        <nav><a href="/docs">Pricing</a><a href="/docs">API</a></nav>
+    </div>
+    <div class="container">
+        <h1>Your AI Personal Shopper</h1>
+        <p class="subtitle">Tell me what you're looking for. Get personalized recommendations with prices, stores, and styling tips.</p>
+        <div class="form-card">
+            <div class="form-group">
+                <label>What are you shopping for?</label>
+                <textarea id="description" placeholder="e.g., A comfortable everyday sneaker that looks good with jeans and chinos, preferably white or neutral"></textarea>
+            </div>
+            <div class="examples">
+                <button onclick="setExample('A birthday gift for my wife who loves cooking')">Birthday gift</button>
+                <button onclick="setExample('Professional work laptop under $1500')">Work laptop</button>
+                <button onclick="setExample('Cozy winter coat for someone who runs cold')">Winter coat</button>
+                <button onclick="setExample('Home office desk setup for small spaces')">Office setup</button>
+                <button onclick="setExample('Running shoes for beginner marathon training')">Running shoes</button>
+                <button onclick="setExample('Date night outfit, smart casual, men')">Date outfit</button>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="category">
+                        <option value="clothing">Clothing & Fashion</option>
+                        <option value="electronics">Electronics & Tech</option>
+                        <option value="home">Home & Decor</option>
+                        <option value="gifts">Gifts</option>
+                        <option value="beauty">Beauty & Skincare</option>
+                        <option value="fitness">Fitness & Sports</option>
+                        <option value="kitchen">Kitchen & Cooking</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Budget</label>
+                    <select id="budget">
+                        <option value="any">Any budget</option>
+                        <option value="under $50">Under $50</option>
+                        <option value="$50-$150">$50 - $150</option>
+                        <option value="$150-$500">$150 - $500</option>
+                        <option value="$500+">$500+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Occasion</label>
+                    <select id="occasion">
+                        <option value="everyday">Everyday</option>
+                        <option value="work">Work / Professional</option>
+                        <option value="date night">Date Night</option>
+                        <option value="gift">Gift Giving</option>
+                        <option value="special event">Special Event</option>
+                        <option value="travel">Travel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Style</label>
+                    <select id="style">
+                        <option value="classic">Classic</option>
+                        <option value="minimalist">Minimalist</option>
+                        <option value="trendy">Trendy</option>
+                        <option value="luxury">Luxury</option>
+                        <option value="budget-friendly">Budget-Friendly</option>
+                        <option value="eclectic">Eclectic</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" id="genBtn" onclick="generate()">Get Recommendations</button>
+            <div class="error" id="error"></div>
+        </div>
+        <div class="output" id="output">
+            <h2>Your Personalized Picks</h2>
+            <pre id="result"></pre>
+            <button class="copy-btn" onclick="copyResult()">Copy to Clipboard</button>
+        </div>
+    </div>
+    <script>
+        function setExample(text){document.getElementById('description').value=text}
+        async function generate(){
+            const btn=document.getElementById('genBtn');
+            const desc=document.getElementById('description').value.trim();
+            if(!desc){document.getElementById('error').textContent='Please describe what you are looking for.';return}
+            document.getElementById('error').textContent='';
+            btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Finding picks...';
+            document.getElementById('output').style.display='none';
+            try{
+                const r=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:desc,category:document.getElementById('category').value,budget:document.getElementById('budget').value,occasion:document.getElementById('occasion').value,style:document.getElementById('style').value})});
+                const d=await r.json();
+                if(d.error)throw new Error(d.error);
+                document.getElementById('result').textContent=d.result;
+                document.getElementById('output').style.display='block';
+            }catch(e){document.getElementById('error').textContent='Error: '+e.message}
+            finally{btn.disabled=false;btn.textContent='Get Recommendations'}
+        }
+        function copyResult(){navigator.clipboard.writeText(document.getElementById('result').textContent);const b=event.target;b.textContent='Copied!';setTimeout(()=>b.textContent='Copy to Clipboard',2000)}
+    </script>
+</body>
+</html>
