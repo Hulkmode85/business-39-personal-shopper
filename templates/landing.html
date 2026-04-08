@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSenseAI — AI Personal Shopper</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0f;color:#e0e0e0}
+        .nav{padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a2e}
+        .logo{font-size:24px;font-weight:700;color:#fb923c}.logo span{color:#f97316}
+        nav a{color:#9ca3af;text-decoration:none;margin-left:20px;font-size:14px}nav a:hover{color:#fb923c}
+        .nav .cta-sm{background:#f97316;color:#fff;padding:8px 20px;border-radius:8px;font-weight:600}
+        .hero{text-align:center;padding:80px 20px 60px;max-width:800px;margin:0 auto}
+        .badge{display:inline-block;background:#f9731620;color:#fb923c;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:20px;border:1px solid #f9731640}
+        h1{font-size:48px;line-height:1.1;margin-bottom:20px;background:linear-gradient(to right,#fb923c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero p{color:#9ca3af;font-size:18px;line-height:1.6;max-width:600px;margin:0 auto 32px}
+        .cta{display:inline-block;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:600;font-size:16px;transition:opacity .2s}.cta:hover{opacity:.9}
+        .cta-ghost{display:inline-block;color:#fb923c;padding:14px 24px;text-decoration:none;font-weight:500;font-size:16px}
+        .demo{max-width:700px;margin:0 auto 80px;padding:0 20px}
+        .demo-box{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:24px;font-family:'Cascadia Code',monospace}
+        .demo-label{color:#9ca3af;font-size:12px;margin-bottom:8px}
+        .demo-input{color:#fb923c;font-size:15px;margin-bottom:16px}
+        .demo-output{color:#e0e0e0;font-size:14px;background:#0a0a14;padding:16px;border-radius:8px;font-family:'Cascadia Code',monospace}
+        .features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto 80px;padding:0 20px}
+        .feat{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;text-align:center}
+        .feat .icon{font-size:36px;margin-bottom:16px}
+        .feat h3{font-size:18px;margin-bottom:8px;color:#e0e0e0}
+        .feat p{color:#9ca3af;font-size:14px;line-height:1.5}
+        .pricing{text-align:center;padding:80px 20px;max-width:1000px;margin:0 auto}
+        .pricing h2{font-size:32px;margin-bottom:12px}.pricing>p{color:#9ca3af;margin-bottom:40px}
+        .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .plan{background:#111118;border:1px solid #1e1e2e;border-radius:16px;padding:32px;text-align:center}
+        .plan.pop{border-color:#f97316;position:relative}
+        .plan.pop::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#f97316;color:#fff;padding:4px 16px;border-radius:12px;font-size:11px;font-weight:700}
+        .plan h3{font-size:20px;margin-bottom:8px}.plan .price{font-size:40px;font-weight:700;color:#fb923c;margin-bottom:4px}.plan .price span{font-size:16px;color:#9ca3af}
+        .plan .period{color:#9ca3af;font-size:14px;margin-bottom:20px}
+        .plan ul{list-style:none;text-align:left;margin-bottom:24px}
+        .plan li{padding:8px 0;font-size:14px;color:#d0d0d0;border-bottom:1px solid #1a1a2e}
+        .plan li::before{content:'\\2713';color:#fb923c;margin-right:8px;font-weight:700}
+        .plan .btn{display:block;padding:12px;background:#f97316;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;transition:opacity .2s}.plan .btn:hover{opacity:.9}
+        .ftr{text-align:center;padding:40px;border-top:1px solid #1a1a2e;color:#6b7280;font-size:13px}
+        @media(max-width:768px){.features,.plans{grid-template-columns:1fr}h1{font-size:32px}}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo">ShopSense<span>AI</span></div>
+        <nav><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="/" class="cta-sm">Try Free</a></nav>
+    </div>
+
+    <div class="hero">
+        <div class="badge">$5.28B Market — AI Shopping Assistants</div>
+        <h1>Your Personal Shopper, Powered by AI</h1>
+        <p>Tell it what you want in plain English. Get curated product recommendations with prices, where to buy, and styling tips — in seconds.</p>
+        <a href="/" class="cta">Try It Free</a>
+        <a href="#pricing" class="cta-ghost">View Pricing</a>
+    </div>
+
+    <div class="demo">
+        <div class="demo-box">
+            <div class="demo-label">YOU TYPE:</div>
+            <div class="demo-input">"Comfortable white sneakers that go with everything, under $150"</div>
+            <div class="demo-label">SHOPSENSE RETURNS:</div>
+            <div class="demo-output">1. Nike Air Force 1 '07 — $115<br>2. New Balance 550 — $110<br>3. Veja V-10 — $140<br>+ styling tips, budget alt, splurge pick</div>
+        </div>
+    </div>
+
+    <div class="features" id="features">
+        <div class="feat"><div class="icon">&#127919;</div><h3>Personalized Picks</h3><p>Not generic lists — recommendations tailored to your style, budget, and occasion.</p></div>
+        <div class="feat"><div class="icon">&#128176;</div><h3>Real Prices & Stores</h3><p>Every recommendation includes estimated prices and where to buy. No guessing.</p></div>
+        <div class="feat"><div class="icon">&#128161;</div><h3>Styling & Pro Tips</h3><p>Pairing suggestions, budget alternatives, and insider shopping tips included.</p></div>
+    </div>
+
+    <div class="pricing" id="pricing">
+        <h2>Simple Pricing</h2>
+        <p>Start free. Upgrade for unlimited recommendations.</p>
+        <div class="plans">
+            <div class="plan">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <div class="period">3 searches per day</div>
+                <ul>
+                    <li>Personalized picks</li>
+                    <li>All categories</li>
+                    <li>Styling tips</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+            <div class="plan pop">
+                <h3>Pro</h3>
+                <div class="price">$9<span>/mo</span></div>
+                <div class="period">Unlimited searches</div>
+                <ul>
+                    <li>Everything in Free</li>
+                    <li>Unlimited recommendations</li>
+                    <li>Price tracking & alerts</li>
+                    <li>Wishlist & saved searches</li>
+                    <li>Outfit builder</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+            <div class="plan">
+                <h3>Stylist</h3>
+                <div class="price">$29<span>/mo</span></div>
+                <div class="period">For personal stylists</div>
+                <ul>
+                    <li>Everything in Pro</li>
+                    <li>Client profiles</li>
+                    <li>Branded recommendations</li>
+                    <li>API access</li>
+                    <li>Affiliate link integration</li>
+                    <li>Analytics dashboard</li>
+                </ul>
+                <a href="/" class="btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ftr">&copy; 2026 ShopSenseAI. All rights reserved.</div>
+</body>
+</html>
